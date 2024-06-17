@@ -1,5 +1,6 @@
 import { Router } from 'express'
 import productModel from '../models/product.models.js'
+import { auth } from '../middlewares/auth.middleware.js'
 // import ProductManager from '../ProductManager.js'
 
 const router = Router()
@@ -14,10 +15,8 @@ router.get('/register', (req, res) => {
 })
 
 
-router.get('/home', async (req, res) => {    
-    const products = await productModel.find({}).lean()
-
-    console.log('prods', products)
+router.get('/home', auth, async (req, res) => {    
+    const products = await productModel.find({}).lean()    
 
     res.render('home', {        
         title: 'E-commerce',
