@@ -49,7 +49,7 @@ sessionRouter.post('/login', async (req, res) => {
         admin: userFound.role === 'admin'
     }
 
-    console.log(req.session.user)
+    // console.log(req.session.user)
     // res.send('login success')
     res.redirect('/home')    
 })
@@ -57,6 +57,6 @@ sessionRouter.post('/login', async (req, res) => {
 sessionRouter.get('/logout', (req, res) => {
     req.session.destroy(err => {
         if(err) return res.send({status: 'error', error: err})
-        else return res.send('logout')
+        else return res.redirect('/login')
     })
 })
